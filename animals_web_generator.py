@@ -10,7 +10,8 @@ def serialize_animal(animal_obj):
         "Name": animal_obj.get("name"),
         "Diet": animal_obj['characteristics'].get('diet'),
         "Location": animal_obj.get("locations")[0],
-        "Type": animal_obj['characteristics'].get('type')
+        "Type": animal_obj['characteristics'].get('type'),
+        "Skin Type": animal_obj['characteristics'].get('skin_type'),
     }
     animal_card = '<li class="cards__item">\n'
     for key, value in to_display.items():
