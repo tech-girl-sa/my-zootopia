@@ -15,10 +15,10 @@ def serialize_animal(animal_obj):
     animal_card = '<li class="cards__item">\n'
     for key, value in to_display.items():
         if key == "Name":
-            animal_card += f'<div class="card__title">{value}</div>\n <p class="card__text">'
+            animal_card += f'<div class="card__title">{value}</div>\n <p class="card__text">\n<ul class="animal_info">'
         elif value:
-            animal_card += f"<strong>{key}</strong>: {value}<br/>\n"
-    animal_card += '</p>\n</li>\n'
+            animal_card += f"<li><strong>{key}</strong>: {value}</li>\n"
+    animal_card += '</ul>\n</p>\n</li>\n'
     return animal_card
 
 def serialize_animals(data):
