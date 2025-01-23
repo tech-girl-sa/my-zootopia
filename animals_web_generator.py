@@ -5,7 +5,7 @@ def load_data(file_path):
   with open(file_path, "r") as handle:
     return json.load(handle)
 
-def get_animals_info(data):
+def serialize_animals_cards(data):
     animals =""
     for animal in data:
         to_display = {
@@ -14,10 +14,11 @@ def get_animals_info(data):
             "Location": animal.get("locations")[0],
             "Type":animal['characteristics'].get('type')
         }
-        display_text = ""
+        display_text = '<li class="cards__item">\n'
         for key, value in to_display.items():
             if value:
-                display_text = display_text + f"\n{key}: {value}"
+                display_text += f"{key}: {value}<br/>\n"
+        display_text += '</li>\n'
         animals += display_text
     return animals
 
@@ -27,7 +28,7 @@ def load_template(html_path):
 
 def regenerate_html(html_path, data):
     content = load_template(html_path)
-    animals_display = get_animals_info(data)
+    animals_display = serialize_animals_cards(data)
     new_content = content.replace("__REPLACE_ANIMALS_INFO__", animals_display)
     with open(html_path,"w") as handle:
         handle.write(new_content)
