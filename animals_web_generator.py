@@ -16,9 +16,11 @@ def serialize_animals_cards(data):
         }
         display_text = '<li class="cards__item">\n'
         for key, value in to_display.items():
-            if value:
-                display_text += f"{key}: {value}<br/>\n"
-        display_text += '</li>\n'
+            if key == "Name":
+                display_text += f'<div class="card__title">{ value }</div>\n <p class="card__text">'
+            elif value:
+                display_text += f"<strong>{ key }</strong>: { value }<br/>\n"
+        display_text += '</p>\n</li>\n'
         animals += display_text
     return animals
 
