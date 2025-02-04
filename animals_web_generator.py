@@ -6,6 +6,7 @@ def load_data(file_path):
     return json.load(handle)
 
 def serialize_animal(animal_obj):
+    """generates one card to display animal info"""
     to_display = {
         "Name": animal_obj.get("name"),
         "Diet": animal_obj['characteristics'].get('diet'),
@@ -27,6 +28,7 @@ def serialize_animal(animal_obj):
     return animal_card
 
 def serialize_animals(data):
+    """generates list of animal cards in webpage"""
     animals =""
     for animal in data:
         animal_card = serialize_animal(animal)
@@ -34,10 +36,12 @@ def serialize_animals(data):
     return animals
 
 def load_template(html_path):
+    """loads the template to use in generating the webpage"""
     with open(html_path, "r") as handle:
         return handle.read()
 
 def regenerate_html(html_path, data):
+    """generates the whole webpage"""
     content = load_template("animals_template.html")
     animals_display = serialize_animals(data)
     new_content = content.replace("__REPLACE_ANIMALS_INFO__", animals_display)
