@@ -16,7 +16,11 @@ def serialize_animal(animal_obj):
     animal_card = '<li class="cards__item">\n'
     for key, value in to_display.items():
         if key == "Name":
-            animal_card += f'<div class="card__title">{value}</div>\n <p class="card__text">\n<ul class="animal_info">'
+            animal_card += f''''
+            <div class="card__title">{value}</div>
+            <p class="card__text">
+            <ul class="animal_info">
+'''
         elif value:
             animal_card += f"<li><strong>{key}</strong>: {value}</li>\n"
     animal_card += '</ul>\n</p>\n</li>\n'
@@ -34,13 +38,14 @@ def load_template(html_path):
         return handle.read()
 
 def regenerate_html(html_path, data):
-    content = load_template(html_path)
+    content = load_template("animals_template.html")
     animals_display = serialize_animals(data)
     new_content = content.replace("__REPLACE_ANIMALS_INFO__", animals_display)
     with open(html_path,"w") as handle:
         handle.write(new_content)
+    print(f"Website generated successfully! please check {html_path}")
 
 if __name__ == "__main__":
     data = load_data('animals_data.json')
-    html_path = "animals_template.html"
+    html_path = "animals.html"
     regenerate_html(html_path, data)
